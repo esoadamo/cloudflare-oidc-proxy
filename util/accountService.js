@@ -47,7 +47,7 @@ class AccountService {
           continue;
         }
 
-        resolve(AccountService.getAccountById(accountId));
+        return resolve(AccountService.getAccountById(accountId));
       }
 
       throw new Error(`Local account ${expectedMail} not found`);
