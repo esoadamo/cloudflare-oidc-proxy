@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "pretest": "node --input-type=module -e \"import { copyFileSync, existsSync } from 'node:fs'; const files = [['config/main.example.js', 'config/main.js'], ['config/accounts.example.js', 'config/accounts.js']]; for (const [src, dest] of files) { if (!existsSync(dest) && existsSync(src)) copyFileSync(src, dest); }\"",
     "test": "vitest run"
   },
   "author": "",
