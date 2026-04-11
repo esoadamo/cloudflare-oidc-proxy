@@ -56,7 +56,10 @@ export const addUserInfo = (req, res, next) => {
         // noinspection JSUnresolvedReference
         /** @type {string} */
         const email = decoded.email;
-        assert(typeof email === "string");
+        if (typeof email !== "string") {
+            assert(res);
+            return res.status(403).send({ status: false, message: 'invalid token' });
+        }
         req.user = {email};
         next();
     });
