@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run"
   },
   "author": "",
   "type": "module",
@@ -26,5 +26,10 @@
   },
   "volta": {
     "node": "22.14.0"
+  },
+  "devDependencies": {
+    "nock": "^14.0.12",
+    "supertest": "^7.2.2",
+    "vitest": "^4.1.4"
   }
 }
