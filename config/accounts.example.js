@@ -57,7 +57,7 @@ export const ACCOUNTS = [
  * @type {{[account_id: string]: string[]}}
  */
 export const ACCOUNT_MAP = {
-    "account1": ['email.A@example.com', 'email.B@example.com']
+    "account1": ['email@example.com', 'email.A@example.com', 'email.B@example.com']
 } ;
 
 Object.keys(ACCOUNT_MAP).forEach((localId) => assert(ACCOUNTS.find(account => account.sub === localId), `${localId} is specified in map but not in accounts`));
