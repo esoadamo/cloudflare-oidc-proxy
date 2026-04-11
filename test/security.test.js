@@ -176,20 +176,15 @@ describe('Security: JWT Token Handling', () => {
 
     await new Promise((resolve) => {
       addUserInfo(req, res, () => {
-        // Without email, the assertion should fail
-        // or user should not be set with an email
         resolve();
       });
 
-      setTimeout(resolve, 1000);
+      setTimeout(resolve, 2000);
     });
 
-    // Either the request was rejected (403) or the assertion failed
-    if (res.statusCode !== 403) {
-      // If it didn't return 403, next() must have been called
-      // but req.user should not have a valid email
-      expect(req.user?.email).toBeUndefined();
-    }
+    // Token without email should be rejected with 403
+    expect(res.statusCode).toBe(403);
+    expect(res.body).toEqual({ status: false, message: 'invalid token' });
   });
 
   it('should not accept none algorithm', async () => {

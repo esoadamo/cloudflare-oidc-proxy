@@ -59,7 +59,7 @@ async function main() {
                 } else if (req.method === 'GET' || req.method === 'HEAD') {
                     res.redirect(url.format({
                         protocol: 'https',
-                        host: req.get('host'),
+                        host: req.hostname,
                         pathname: req.originalUrl,
                     }));
                 } else {

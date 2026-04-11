@@ -13,14 +13,23 @@ import { errors } from 'oidc-provider';
 
 const body = urlencoded({ extended: false });
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const keys = new Set();
 const debug = (obj) => querystring.stringify(Object.entries(obj).reduce((acc, [key, value]) => {
   keys.add(key);
   if (isEmpty(value)) return acc;
-  acc[key] = inspect(value, { depth: null });
+  acc[key] = escapeHtml(inspect(value, { depth: null }));
   return acc;
 }, {}), '<br/>', ': ', {
-  encodeURIComponent(value) { return keys.has(value) ? `<strong>${value}</strong>` : value; },
+  encodeURIComponent(value) { return keys.has(value) ? `<strong>${escapeHtml(value)}</strong>` : value; },
 });
 const { SessionNotFound } = errors;
 export default (app, provider) => {
