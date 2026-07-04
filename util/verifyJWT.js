@@ -2,7 +2,7 @@
 
 import jwksClient from 'jwks-rsa';
 import jwt from 'jsonwebtoken';
-import cookie from "cookie";
+import { parseCookie } from "cookie";
 import express from "express";
 import { strict as assert } from 'assert';
 import { MAIN_CONFIG } from "../config/main.js";
@@ -15,7 +15,7 @@ const {Request, Response} = express;
 
 const CERTS_URL = `https://${MAIN_CONFIG.cf_team_domain}.cloudflareaccess.com/cdn-cgi/access/certs`;
 
-const client = jwksClient({
+export const client = jwksClient({
     jwksUri: CERTS_URL
 });
 
@@ -37,7 +37,7 @@ export const addUserInfo = (req, res, next) => {
     let token = req.header('Cf-Access-Jwt-Assertion');
 
     if (!token && req.header('Cookie')) {
-        const cookies = cookie.parse(req.header('Cookie'));
+        const cookies = parseCookie(req.header('Cookie'));
         token = cookies['CF_Authorization'];
     }
 

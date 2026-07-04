@@ -56,7 +56,7 @@ export class KeyManager {
                 throw new Error('Generated keys are invalid.');
             }
             await this.saveKeysToFile([keys.rsaKey, keys.ecKey], filename);
-            return keys;
+            return await this.loadKeysFromFile(filename);
         }
     }
 

@@ -5,32 +5,35 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "pretest": "node --input-type=module -e \"import { copyFileSync, existsSync } from 'node:fs'; const files = [['config/main.example.js', 'config/main.js'], ['config/accounts.example.js', 'config/accounts.js']]; for (const [src, dest] of files) { if (!existsSync(dest) && existsSync(src)) copyFileSync(src, dest); }\"",
-    "test": "vitest run"
+    "pretest": "node --input-type=module -e \"import { copyFileSync, existsSync } from 'node:fs'; const files = [['config/main.example.js', 'config/main.js'], ['config/accounts.example.js', 'config/accounts.js'], ['config/clients.example.js', 'config/clients.js']]; for (const [src, dest] of files) { if (!existsSync(dest) && existsSync(src)) copyFileSync(src, dest); }\"",
+    "test": "node --test test/**/*.test.js"
   },
   "author": "",
   "type": "module",
   "license": "ISC",
   "dependencies": {
-    "cookie": "^1.0.1",
-    "desm": "^1.3.0",
-    "dotenv": "^16.3.1",
-    "ejs": "^3.1.10",
-    "express": "^4.22.1",
-    "helmet": "^7.0.0",
-    "jose": "^4.15.5",
-    "jsonwebtoken": "^9.0.2",
-    "jwks-rsa": "^3.1.0",
+    "cookie": "^2.0.1",
+    "desm": "^1.3.1",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "helmet": "^8.2.0",
+    "jose": "^6.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "jwks-rsa": "^4.1.0",
     "lodash": "^4.18.1",
     "node-jose": "^2.2.0",
-    "oidc-provider": "^9.4.0"
-  },
-  "volta": {
-    "node": "22.14.0"
+    "oidc-provider": "^9.8.6"
   },
   "devDependencies": {
     "nock": "^14.0.12",
     "supertest": "^7.2.2",
     "vitest": "^4.1.4"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  },
+  "volta": {
+    "node": "22.14.0"
   }
 }
